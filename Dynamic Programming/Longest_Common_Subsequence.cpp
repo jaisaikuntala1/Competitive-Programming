@@ -1,7 +1,7 @@
 /*
 
 Longest Common Subsequence 
-Medium Accuracy: 49.98% Submissions: 10082 Points: 4
+
 Given two sequences, find the length of longest subsequence present in both of them. Both the strings are of uppercase.
 
 Example 1:
