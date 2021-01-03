@@ -128,3 +128,35 @@ int intersectPoint(Node* head1, Node* head2)
     
 }
 
+
+/* Driver program to test above function*/
+int main()
+{
+    int T,n1,n2,n3;
+
+    cin>>T;
+    while(T--)
+    {
+        cin>>n1>>n2>>n3;
+        
+        Node* head1 = inputList(n1);
+        Node* head2 = inputList(n2);
+        Node* common = inputList(n3);
+        
+        Node* temp = head1;
+        while(temp!=NULL && temp->next != NULL)
+            temp = temp->next;
+        if(temp!=NULL) temp->next = common;
+        
+        temp = head2;
+        while(temp!=NULL && temp->next != NULL)
+            temp = temp->next;
+        if(temp!=NULL) temp->next = common;
+        
+        cout << intersectPoint(head1, head2) << endl;
+    }
+    return 0;
+}
+
+// } Driver Code Ends
+
