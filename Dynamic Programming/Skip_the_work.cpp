@@ -37,3 +37,69 @@ Constraints:
 
 */
 
+#include <iostream>
+using namespace std;
+
+ // } Driver Code Ends
+
+
+
+
+
+
+class Solution
+{
+  public:
+    int minAmount(int arr[] , int n)
+    {
+        if (n <= 0) 
+        {return 0;} 
+  
+    // Initialize value for the case when there 
+    // is only one task in task list. 
+    int incl = arr[0];  // First task is included 
+    int excl = 0;       // First task is exluded 
+  
+    // Process remaining n-1 tasks 
+    for (int i=1; i<n; i++) 
+    { 
+       // Time taken if current task is included 
+       // There are two possibilities 
+       // (a) Previous task is also included 
+       // (b) Previous task is not included 
+       int incl_new = arr[i] + min(excl, incl); 
+  
+       // Time taken when current task is not 
+       // included.  There is only one possibility 
+       // that previous task is also included. 
+       int excl_new = incl; 
+  
+       // Update incl and excl for next iteration 
+       incl = incl_new; 
+       excl = excl_new; 
+    } 
+  
+    // Return maximum of two values for last task 
+    return min(incl, excl); 
+      
+     
+        
+    }
+};
+
+// { Driver Code Starts.
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+        {
+            int n;
+            cin>>n;
+            int arr[n];
+            for(int i = 0;i<n;i++)
+                cin>>arr[i];
+            Solution ob;    
+            cout<<ob.minAmount(arr,n)<<endl;    
+        }
+}  // } Driver Code Ends
