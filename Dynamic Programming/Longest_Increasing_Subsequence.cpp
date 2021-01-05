@@ -32,3 +32,55 @@ Constraints:
 0 ≤ A[i] ≤ 10000
 
 */
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int longestSubsequence(int, int[]);
+
+int main()
+{
+    //taking total testcases
+    int t,n;
+    cin>>t;
+    while(t--)
+    {
+        //taking size of array
+        cin>>n;
+        int a[n];
+        
+        //inserting elements to the array
+        for(int i=0;i<n;i++)
+            cin>>a[i];
+
+        //calling method longestSubsequence()
+        cout << longestSubsequence(n, a) << endl;
+    }
+}
+// } Driver Code Ends
+
+
+// return length of longest strictly increasing subsequence
+
+int longestSubsequence(int n, int a[])
+{
+   // your code here
+   int arr[n+1];
+   arr[0] = INT_MIN;
+   for(int i=1;i<=n;i++){
+       arr[i] = INT_MAX;
+   }
+   
+   int ans = INT_MIN;
+   for(int i=0;i<n;i++){
+       int idx = lower_bound(arr,arr+n+1,a[i]) - arr;
+       arr[idx] = a[i];
+       ans = max(ans,idx);
+   }
+   
+   return ans;
+   
+   
+   
+}
