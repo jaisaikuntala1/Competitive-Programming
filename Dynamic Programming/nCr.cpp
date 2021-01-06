@@ -29,3 +29,86 @@ Constraints:
 1 ≤ r ≤ 800
 
 */
+
+
+// Initial Template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+
+#define mod 1000000007
+// User function Template for C++
+
+long long int fact(long long int n){
+    long long int vec[n+1];
+    vec[0] = 1;
+    for(int i=1;i<=n;i++){
+        vec[i] = i*vec[i-1];
+        vec[i]%=mod;
+    }
+    return vec[n];
+}
+
+long long int power(long long int x,long long int y){
+    if(y==0){
+        return 1;
+    }
+    long long int ans;
+    if(y%2==0){
+        ans = power(x,y/2);
+        ans = (ans*ans)%mod;
+        return ans;
+    }
+    else{
+        return (x*power(x,y-1))%mod;
+    }
+    
+}
+long long int mod_inv(long long int n){
+    return power(n,mod-2);
+}
+
+long long int fact_inv(long long int n){
+    long long int vec[n+1];
+    vec[0] = 1;
+    for(long long int i=1;i<=n;i++){
+        vec[i] = (mod_inv(i)*vec[i-1])%mod;
+    }
+    return vec[n];
+}
+
+int solve(long long int n,long long int r){
+    long long int ans = 1;
+    ans = (ans*fact(n))%mod;
+    ans = (ans*fact_inv(r))%mod;
+    ans = (ans*fact_inv(n-r))%mod;
+    return ans;
+}
+
+class Solution{
+public:
+    long long int nCr(long long int n, long long int r){
+        // code here
+        if(r>n){
+            return 0;
+        }
+        return solve(n,r);
+    }
+};
+
+// { Driver Code Starts.
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n, r;
+        cin>>n>>r;
+        
+        Solution ob;
+        cout<<ob.nCr(n, r)<<endl;
+    }
+    return 0;
+}  // } Driver Code Ends
