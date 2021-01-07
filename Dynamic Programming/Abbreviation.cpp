@@ -50,7 +50,7 @@ YES
 
 Explanation
 
-We have  daBcd and  ABC. We perform the following operation:
+We have a = daBcd and b =  ABC. We perform the following operation:
 
 Capitalize the letters a and c in  so that  dABCd.
 Delete all the remaining lowercase letters in  so that  ABC.
