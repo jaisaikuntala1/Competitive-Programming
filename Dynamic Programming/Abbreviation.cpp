@@ -48,7 +48,9 @@ Sample Output
 
 YES
 
-Explanation
+Explanation :
+
+daBcd---->dABCd---->ABC
 
 We have a = daBcd and b =  ABC. We perform the following operation:
 
