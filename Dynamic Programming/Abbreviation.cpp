@@ -54,8 +54,8 @@ daBcd---->dABCd---->ABC
 
 We have a = daBcd and b =  ABC. We perform the following operation:
 
-Capitalize the letters a and c in  so that  dABCd.
-Delete all the remaining lowercase letters in  so that  ABC.
-Because we were able to successfully convert  to , we print YES on a new line.
+Capitalize the letters a and c in a so that a = dABCd.
+Delete all the remaining lowercase letters in a so that a = ABC.
+Because we were able to successfully convert a to b, we print YES on a new line.
 
 */
