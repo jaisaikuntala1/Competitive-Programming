@@ -43,12 +43,12 @@ Sample Input
 1
 daBcd
 ABC
+
 Sample Output
 
 YES
-Explanation
 
-image
+Explanation
 
 We have  daBcd and  ABC. We perform the following operation:
 
