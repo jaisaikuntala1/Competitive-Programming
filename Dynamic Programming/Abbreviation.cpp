@@ -59,3 +59,57 @@ Delete all the remaining lowercase letters in a so that a = ABC.
 Because we were able to successfully convert a to b, we print YES on a new line.
 
 */
+
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int dp[1002][1002];
+int main(){
+    int q;cin>>q;
+    while(q--){
+        string a,b;cin>>a>>b;
+        a = " "+a;
+        b = " "+b;
+        int x = a.length();
+        int y = b.length();
+        memset(dp,0,sizeof dp);
+        dp[0][0] = 1;
+        for(int i=0;i<x-1;i++){
+            for(int j=0;j<=y-1;j++){
+                if(dp[i][j] == 1)
+                {
+                    if(a[i+1] > 'Z')
+                    {
+                        dp[i+1][j] = 1;
+                        if(j+1<=y-1)
+                        {
+                            if(a[i+1]-'a' == b[j+1]-'A')
+                            {
+                            dp[i+1][j+1] = 1;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if(j+1<=y-1)
+                        {
+                            if(a[i+1]-'A' == b[j+1]-'A')
+                            {
+                                dp[i+1][j+1] = 1;
+                            }
+                        }
+
+                    }
+
+                }
+            }
+        }
+        if(dp[x-1][y-1]){
+            cout<<"YES"<<endl;
+        }
+        else{
+            cout<<"NO"<<endl;
+        }
+        
+    }
+}
