@@ -114,8 +114,7 @@ int main() {
                 }
             }
             if(flag==0){
-                int y = -1;
-                cout<<y<<endl;
+                cout<<-1<<endl;
                 continue;
             }
         }
