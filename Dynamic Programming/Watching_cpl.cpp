@@ -51,7 +51,31 @@ Example case 2: We only need the box with height 10 for one tower and the box wi
 
 #include <bits/stdc++.h>
 using namespace std;
-
+int calculate(int h[],int n,int k){
+    int dp[n+1][16000];
+    memset(dp,0,sizeof dp);
+    for(int i=0;i<=n;i++){
+        dp[i][0] = 1;
+    }
+    int sum_till_now = 0;
+    for(int i=1;i<=n;i++){
+        sum_till_now += h[i-1];
+        for(int j=h[i-1];j<=sum_till_now;j++){
+            dp[i][j] = dp[i-1][j];
+            if(dp[i-1][j-h[i-1]]==1){
+                dp[i][j] = 1;
+            }
+        }
+        if(sum_till_now>=(2*k)){
+            for(int j=k;j<=(sum_till_now-k);j++){
+                if(dp[i][j]==1){
+                    return i;
+                }
+            }
+        }
+    }
+    return -1;
+}
 int main() {
     int t;
     cin>>t;
