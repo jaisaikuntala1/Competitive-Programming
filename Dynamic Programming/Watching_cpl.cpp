@@ -47,3 +47,62 @@ Example case 1: The first tower can be built with boxes 8+10+20=38 and the secon
 Example case 2: We only need the box with height 10 for one tower and the box with height 9 for the other tower.
 
 */
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int t;
+    cin>>t;
+    while(t--){
+        int n,k;
+        cin>>n>>k;
+        int h[n];
+        int total_sum = 0;
+        for(int i=0;i<n;i++){
+            cin>>h[i];
+            total_sum += h[i];
+        }
+        if(total_sum<(2*k)){
+            cout<<-1<<endl;
+            continue;
+        }
+        sort(h,h+n,greater<int>());
+        if(n<=100 && k<=100){
+            cout<<calculate(h,n,k)<<endl;
+            continue;
+        }
+        if(h[0]>=k && h[1]>=k){
+            cout<<2<<endl;
+            continue;
+        }
+        else if(h[0]>=k && h[1]<k){
+            int cal = 0;
+            int flag = 0;
+            for(int i=1;i<n;i++){
+                cal += h[i];
+                if(cal>=k){
+                    int ans = i+1;
+                    cout<<ans<<endl;
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag==0){
+                int y = -1;
+                cout<<y<<endl;
+                continue;
+            }
+        }
+        else{
+            cout<<calculate(h,n,k)<<endl;
+            continue;
+        }
+        
+        
+        
+
+    }
+}
+
