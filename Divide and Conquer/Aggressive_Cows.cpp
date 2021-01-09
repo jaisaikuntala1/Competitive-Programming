@@ -24,3 +24,53 @@ Sample Output
 Problem Credits - (Spoj)[http://www.spoj.com/problems/AGGRCOW/]
 
 */
+
+
+#include <iostream>
+#include <bits/stdc++.h>
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+#define int long long
+typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> PBDS;
+
+
+bool can_place_cows(int stalls[], int min_sep, int n, int c){
+    int last_cow = stalls[0];
+    int cnt = 1;
+    for(int i=1;i<n;i++){
+        if(stalls[i] - last_cow >= min_sep){
+            cnt++;
+            last_cow = stalls[i];
+        }
+        if(cnt == c) return true;
+    }
+    return false;
+}
+int32_t main(){
+    int n,c;
+    cin>>n>>c;
+    int stalls[n];
+    for(int i=0;i<n;i++) cin>>stalls[i];
+    sort(stalls,stalls+n);
+    int ans = 0;
+    int s = 0;
+    int e = stalls[n-1] - stalls[0];
+    while(s<=e){
+        int mid = (s+e)>>1;
+        bool can_place = can_place_cows(stalls,mid,n,c);
+        if(can_place){
+            ans = mid;
+            s = mid+1;
+        }
+        else{
+            e = mid - 1;
+        }
+
+    }
+    cout<<ans;
+
+    
+
+}
