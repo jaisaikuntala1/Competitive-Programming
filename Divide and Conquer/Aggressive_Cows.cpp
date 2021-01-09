@@ -26,14 +26,9 @@ Problem Credits - (Spoj)[http://www.spoj.com/problems/AGGRCOW/]
 */
 
 
-#include <iostream>
-#include <bits/stdc++.h>
-#include<ext/pb_ds/assoc_container.hpp>
-#include<ext/pb_ds/tree_policy.hpp>
+#include<bits/stdc++.h>
 using namespace std;
-using namespace __gnu_pbds;
 #define int long long
-typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> PBDS;
 
 
 bool can_place_cows(int stalls[], int min_sep, int n, int c){
