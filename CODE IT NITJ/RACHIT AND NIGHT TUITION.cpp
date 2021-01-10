@@ -22,3 +22,38 @@ Input- 5 -3 2 2 0 -3 1 2 0 -1 -3 -3 0 2 3 2 3 -1 3 -2 2
 Output- 5 4 2 0 3
 
 */
+
+#include <iostream>
+using namespace std;
+int main() {
+    int t;
+    cin>>t;
+    while(t--){
+        int x,y,c,r,a,b;
+        cin>>x>>y>>c>>r;
+        a = min(x,y);
+        b = max(x,y);
+        int tot_dist = b-a;
+        if((c+r)<a || (c-r)>b){
+            cout<<tot_dist<<" ";
+        }
+        else if(tot_dist==0){
+            cout<<0<<" ";
+        }
+        else if(r==0){
+            cout<<b-a<<" ";
+        }
+        else if(a<=(c-r) && (c+r)<=b){
+            cout<<(tot_dist-(2*r))<<" ";
+        }
+        else if((c-r)<=a && (c+r)<=b){
+            cout<<tot_dist-(c+r-a)<<" ";
+        }
+        else if(a<=(c-r) && b<=(c+r)){
+            cout<<tot_dist-(b-c+r)<<" ";
+        }
+        else{
+            cout<<0<<" ";
+        }
+    }
+}
