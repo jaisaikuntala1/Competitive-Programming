@@ -45,7 +45,7 @@ If he pairs with a single person, then the remaining n-2 people can be arranged 
 So, he can pair with any other person in n-1 ways, and for each time he pairs with a person, the remaining people can be
 arranged in ways(n-2) ways. So, case2 = (n-1)*ways(n-2);
 
-Total
+Total = case1+case2 = ways(n-1) + (n-1)*ways(n-2);
 */
 
 //CODE :
