@@ -72,6 +72,5 @@ int32_t main() {
 		cout<<dp[n]<<endl;
 	}
 
-
 	return 0;
 }
