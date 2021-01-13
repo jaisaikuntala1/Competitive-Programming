@@ -77,6 +77,7 @@ void inversion_count(int a[],int l,int r){
     
 
 }
+
 int32_t main(){
     int t;cin>>t;
     while(t--){
