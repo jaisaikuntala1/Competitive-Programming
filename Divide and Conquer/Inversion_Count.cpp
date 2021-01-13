@@ -1,5 +1,8 @@
 /*
 
+
+INVERSION COUNT
+
 You are given an array A find out number of pairs (i,j) in array A such that A[i] > A[j] and i < j.
 
 Input Format
