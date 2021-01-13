@@ -25,3 +25,72 @@ Sample Output
 3
 
 */
+
+
+
+#include <iostream>
+#include <bits/stdc++.h>
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+#define int long long
+typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> PBDS;
+
+int inv_cnt;
+
+void merge(int *a,int l,int mid, int r){
+    int i=l;
+    int j=mid+1;
+    int temp[r-l+1];
+    int k = 0;
+    while(i<=mid && j<=r){
+        if(a[i]<a[j]){
+            temp[k] = a[i];
+            i++;
+            k++;
+        }
+        else{
+            temp[k] = a[j];
+            k++;
+            j++;
+            inv_cnt += (mid-i+1);
+        }
+    }
+    while(i<=mid){
+        temp[k] = a[i];
+        i++;
+        k++;
+    }
+    while(j<=r){
+        temp[k] = a[j];
+        j++;
+        k++;
+    }
+    for(int i = l;i<=r;i++){
+        a[i] = temp[i-l];
+    }
+}
+
+void inversion_count(int a[],int l,int r){
+    if(l<r){
+        int mid = (l+r)>>1;
+        inversion_count(a,l,mid);
+        inversion_count(a,mid+1,r);
+        merge(a,l,mid,r);
+    }
+    
+
+}
+int32_t main(){
+    int t;cin>>t;
+    while(t--){
+        int n;cin>>n;
+        int a[n];
+        for(int i=0;i<n;i++) cin>>a[i];
+        inv_cnt = 0;
+        inversion_count(a,0,n-1);
+        cout<<inv_cnt<<endl;
+    }
+
+}
