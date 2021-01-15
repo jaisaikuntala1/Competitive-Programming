@@ -1,5 +1,6 @@
 /*
 
+PAINTER'S PARTITION PROBLEM :
 
 Given K painters to paint N boards where each painter takes 1 unit of time to paint 1 unit of boards i.e. if the length of a particular board is 5, it will take 5 units of time to paint the board. Compute the minimum amount of time to paint all the boards.
 
