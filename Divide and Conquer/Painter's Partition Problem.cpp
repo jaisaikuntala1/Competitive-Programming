@@ -32,7 +32,6 @@ Sample Output
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
-
 bool check_if(int boards[], int k,int n,int max_time){
     int num_painters = 1;
     int tt = 0;
@@ -48,7 +47,6 @@ bool check_if(int boards[], int k,int n,int max_time){
     }
     return true;
 }
-
 int32_t main(){
     int k,n;
     cin>>k>>n;
