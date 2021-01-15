@@ -27,3 +27,52 @@ Sample Output
 10
 
 */
+
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+
+bool check_if(int boards[], int k,int n,int max_time){
+    int num_painters = 1;
+    int tt = 0;
+    for(int i=0;i<n;i++){
+        if(tt+boards[i]>max_time){
+            num_painters++;
+            tt = boards[i];
+            if(num_painters > k) return false;
+        }
+        else{
+            tt += boards[i];
+        }
+    }
+    return true;
+}
+
+int32_t main(){
+    int k,n;
+    cin>>k>>n;
+    int boards[n];
+    int min_time = INT_MIN;
+	int csum = 0;
+    for(int i=0;i<n;i++) {
+        cin>>boards[i];
+        min_time = max(min_time,boards[i]);
+		csum += boards[i];
+        }
+    int s = min_time;
+    int e = csum;
+    int ans = 0;
+    while(s<=e){
+        int mid = (s+e)>>1;
+        if(check_if(boards,k,n,mid)){
+            ans = mid;
+            e = mid-1;
+        }
+        else{
+            s = mid+1;
+        }
+    }
+    cout<<ans;
+ 
+}
