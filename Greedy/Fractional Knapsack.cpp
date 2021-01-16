@@ -46,3 +46,74 @@ Expected Time Complexity : O(NlogN)
 Expected Auxilliary Space: O(1)
 */
 
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Item{
+    int value;
+    int weight;
+};
+
+
+ // } Driver Code Ends
+
+
+//class implemented
+/*
+struct Item{
+    int value;
+    int weight;
+};
+*/
+
+// function to return fractionalweights
+bool compare(Item a, Item b){
+    return ((double)a.value/(double)a.weight)>((double)b.value/(double)b.weight);
+    
+}
+double fractionalKnapsack(int W, Item arr[], int n)
+{
+    // Your code here
+    sort(arr,arr+n,compare);
+    double wt = 0;
+    double profit = 0;
+    for(int i=0;i<n;i++){
+        if(wt+arr[i].weight<=W){
+            wt += arr[i].weight;
+            profit += arr[i].value;
+        }
+        else{
+            double rem_wt = W-wt;
+            profit += (arr[i].value*rem_wt/arr[i].weight);
+            break;
+        }
+    }
+    return profit;
+    
+    
+}
+
+// { Driver Code Starts.
+int main()
+{
+	int t;
+	//taking testcases
+	cin>>t;
+	cout<<setprecision(2)<<fixed;
+	while(t--){
+	    //size of array and weight
+		int n, W;
+		cin>>n>>W;
+		
+		Item arr[n];
+		//value and weight of each item
+		for(int i=0;i<n;i++){
+			cin>>arr[i].value>>arr[i].weight;
+		}
+		
+		//function call
+		cout<<fractionalKnapsack(W, arr, n)<<endl;
+	}
+    return 0;
+}  // } Driver Code Ends
+
