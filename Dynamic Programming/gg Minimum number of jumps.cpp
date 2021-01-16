@@ -98,3 +98,70 @@ int main()
     return 0;
 }
   // } Driver Code Ends
+
+
+
+
+
+  // METHOD 2:
+
+  //Time Complexity : O(n)
+
+  #include<bits/stdc++.h>
+using namespace std;
+
+
+ // } Driver Code Ends
+
+
+// Function to return minimum number of jumps to end of array
+int minJumps(int arr[], int n){
+    // Your code here
+              
+        if(n==1){
+            return 0;
+        }
+        if(arr[0]==0){
+            return -1;
+        }
+        int jumps[n];
+        for(int i=0;i<n;i++){
+            jumps[i] = INT_MAX;
+        }
+        jumps[0] = 0;
+        for(int i=0;i<n-1;i++){
+            for(int j = min(i+arr[i],n-1);j>i;j--){
+                if(jumps[j]>jumps[i]+1){
+                    jumps[j] = jumps[i]+1;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        if(jumps[n-1]==INT_MAX){
+            return -1;
+        }
+        return jumps[n-1];
+}
+
+
+// { Driver Code Starts.
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,i,j;
+        cin>>n;
+        int arr[n];
+        for(int i=0; i<n; i++)
+            cin>>arr[i];
+            
+        cout<<minJumps(arr, n)<<endl;
+    }
+    return 0;
+}
+  // } Driver Code Ends
