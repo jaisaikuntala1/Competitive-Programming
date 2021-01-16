@@ -31,3 +31,35 @@ Output: 2
 
 
 */
+
+
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int n = nums.size();
+              
+        if(n==0 || n==1){
+            return 0;
+        }
+        int jumps[n];
+        for(int i=0;i<n;i++){
+            jumps[i] = INT_MAX;
+        }
+        jumps[0] = 0;
+        for(int i=0;i<n-1;i++){
+            for(int j = min(i+nums[i],n-1);j>i;j--){
+                if(jumps[j]>jumps[i]+1){
+                    jumps[j] = jumps[i]+1;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        return jumps[n-1];
+        
+        
+        
+        
+    }
+};
