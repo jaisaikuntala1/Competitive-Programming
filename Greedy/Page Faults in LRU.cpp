@@ -40,3 +40,55 @@ page number 0 is required which replaces LRU 1: page fault = 6 + 1 = 7
 page number 5 is required which replaces LRU 3: page fault = 7 + 1  = 8.
 
 */
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int n;
+	    cin>>n;
+	    int a[n];
+	    for(int i=0;i<n;i++){
+	        cin>>a[i];
+	    }
+	    int m;
+	    cin>>m;
+	    unordered_set<int> s;
+	    unordered_map<int,int> mp;
+	    int page_faults = 0;
+	    for(int i=0;i<n;i++){
+	        if(s.size()<m){
+	            if(s.find(a[i])==s.end()){
+	                s.insert(a[i]);
+	                page_faults++;
+	            }
+	            mp[a[i]] = i;
+	        }
+	        else{
+	            if(s.find(a[i])==s.end()){
+	                page_faults++;
+	                int lru,idx = INT_MAX;
+	                for(auto it = s.begin();it!=s.end();it++){
+	                    if(mp[*it]<idx){
+	                        idx = mp[*it];
+	                        lru = *it;
+	                        
+	                    }
+	                }
+	                s.erase(lru);
+	                s.insert(a[i]);
+	            }
+	            mp[a[i]] = i;
+	            
+	        }
+	    }
+	    cout<<page_faults<<endl;
+	}
+	return 0;
+}
