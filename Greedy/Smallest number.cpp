@@ -42,3 +42,55 @@ Expected Time Complexity: O(D)
 Expected Auxiliary Space: O(1)
 
 */
+
+#include<bits/stdc++.h> 
+using namespace std; 
+
+ // } Driver Code Ends
+
+
+class Solution{   
+public:
+    string smallestNumber(int S, int D){
+        // code here 
+        if(D*9<S){
+            return "-1";
+        }
+        string ans="";
+        int tot = 0;
+        for(int i = 1;i<=D;i++){
+            for(int j = 0;j<=9;j++){
+                if(i==1 && j==0){
+                    continue;
+                }
+                if(i==D){
+                    int h = S-tot;
+                    ans += to_string(h);
+                    break;
+                }
+                if((S-tot-j)<=(D-i)*9){
+                    tot += j;
+                    string t = to_string(j);
+                    ans += t;
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+};
+
+// { Driver Code Starts.
+int main() 
+{ 
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int S,D;
+        cin >> S >> D;
+        Solution ob;
+        cout << ob.smallestNumber(S,D) << endl;
+    }
+    return 0; 
+}   // } Driver Code Ends
