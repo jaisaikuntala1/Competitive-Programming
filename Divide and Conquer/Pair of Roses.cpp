@@ -39,3 +39,49 @@ Explanation
 Find two such kinds of price of roses which has sum up to equal to Deepak's Money.
 
 */
+
+#include <iostream>
+#include <bits/stdc++.h>
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+#define int long long
+typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> PBDS;
+
+
+int32_t main(){
+    int t;cin>>t;
+    map<int,int> mp;
+    while(t--){
+        int n;cin>>n;
+        int a[n];
+        
+        mp.clear();
+        for(int i=0;i<n;i++) {
+            cin>>a[i];
+            mp[a[i]]++;
+
+        }
+        int price;
+        cin>>price;
+        int a1=0,b1=0,diff=INT_MAX;
+        for(int i=0;i<n;i++){
+            mp[a[i]]--;
+            int temp = price-a[i];
+            if(mp[temp]){
+                if((abs(temp - a[i]))<diff){
+                    diff = abs(temp - a[i]);
+                    a1 = a[i];
+                    b1 = temp;
+                }
+            }
+            mp[a[i]]++;
+
+        }
+        cout<<"Deepak should buy roses whose prices are "<<min(a1,b1)<<" and "<<max(a1,b1)<<"."<<endl;
+
+
+    }
+
+}
