@@ -21,3 +21,54 @@ Sample Output
 60
 
 */
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+bool check_if(int *pages, int max_sum, int n,int students){
+    int num_students = 1;
+    int pages_read = 0;
+    for(int i=0;i<n;i++){
+        if(pages_read+pages[i]>max_sum){
+            num_students++;
+            pages_read = pages[i];
+            if(num_students>students) return false;
+        }
+        else{
+            pages_read += pages[i];
+        }
+    }
+    return true;
+}
+int32_t main(){
+    int n,m;
+    cin>>n>>m;
+    int pages[n];
+    int max_num = INT_MIN;
+    int csum = 0;
+    for(int i=0;i<n;i++) {
+        cin>>pages[i];
+        max_num = max(max_num,pages[i]);
+        csum += pages[i];
+        }
+    sort(pages,pages+n);
+    int ans = 0;
+    int s = max_num;
+    int e = csum;
+    while(s<=e){
+        int mid = (s+e)>>1;
+        bool possib = check_if(pages,mid,n,m);
+        if(possib){
+            ans = mid;
+            e = mid-1;
+        }
+        else{
+            s = mid+1;
+        }
+
+    }
+    cout<<ans;
+
+    
+
+}
