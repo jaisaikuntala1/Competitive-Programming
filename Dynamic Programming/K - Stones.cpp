@@ -3,8 +3,7 @@ K - Stones  /
 Time Limit: 2 sec / Memory Limit: 1024 MB
 
 Score : 
-100
- points
+100 points
 
 Problem Statement
 There is a set 
@@ -88,56 +87,56 @@ Output
 If Taro will win, print First; if Jiro will win, print Second.
 
 Sample Input 1 
-Copy
+
 2 4
 2 3
 Sample Output 1 
-Copy
+
 First
 If Taro removes three stones, Jiro cannot make a move. Thus, Taro wins.
 
 Sample Input 2 
-Copy
+
 2 5
 2 3
 Sample Output 2 
-Copy
+
 Second
 Whatever Taro does in his operation, Jiro wins, as follows:
 
 If Taro removes two stones, Jiro can remove three stones to make Taro unable to make a move.
 If Taro removes three stones, Jiro can remove two stones to make Taro unable to make a move.
 Sample Input 3 
-Copy
+
 2 7
 2 3
 Sample Output 3 
-Copy
+
 First
 Taro should remove two stones. Then, whatever Jiro does in his operation, Taro wins, as follows:
 
 If Jiro removes two stones, Taro can remove three stones to make Jiro unable to make a move.
 If Jiro removes three stones, Taro can remove two stones to make Jiro unable to make a move.
 Sample Input 4 
-Copy
+
 3 20
 1 2 3
 Sample Output 4 
-Copy
+
 Second
 Sample Input 5 
-Copy
+
 3 21
 1 2 3
 Sample Output 5 
-Copy
+
 First
 Sample Input 6 
-Copy
+
 1 100000
 1
 Sample Output 6 
-Copy
+
 Second
 
 */
