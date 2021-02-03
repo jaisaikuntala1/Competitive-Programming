@@ -91,3 +91,44 @@ aaadara
 
 */
 
+
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    string s1,s2;
+    cin>>s1>>s2;
+    int l1 = s1.length();
+    int l2 = s2.length();
+    int dp[l1+1][l2+1];
+    memset(dp,0,sizeof dp);
+    for(int i=1;i<=l1;i++){
+        for(int j=1;j<=l2;j++){
+            if(s1[i-1]==s2[j-1]){
+                dp[i][j] = 1+dp[i-1][j-1];
+            }
+            else{
+                dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
+            }
+        }
+    } 
+    int i=l1,j=l2;
+    string ans="";
+    while(i>0 && j>0){
+        if(s1[i-1]==s2[j-1]){
+            ans += s1[i-1];
+            i--;
+            j--;
+            continue;
+        }
+        if(dp[i-1][j]>dp[i][j-1]){
+            i--;
+            continue;
+        }
+        j--;
+        continue;
+    }
+    reverse(ans.begin(),ans.end());
+    cout<<ans;
+    
+}
+
