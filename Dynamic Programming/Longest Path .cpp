@@ -160,3 +160,42 @@ The red directed path in the following figure is one of the longest:
 
 
 */
+
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+vector<int> v[100005];
+int dp[100005];
+
+int path(int i){
+    if(v[i].size()==0){
+        return 0;
+    }
+    if(dp[i]!=-1){
+        return dp[i];
+    }
+    int max_len = 0;
+    for(auto x:v[i]){
+        max_len = max(max_len,1+path(x));
+    }
+    return dp[i] = max_len;
+
+}
+int32_t main() {
+    int n,m;
+    cin>>n>>m;
+    int a,b;
+    while(m--){
+        cin>>a>>b;
+        v[a].push_back(b);
+
+    }
+    for(int i=0;i<=n;i++){
+        dp[i] = -1;
+    }
+    int ans = INT_MIN;
+    for(int i = 1;i<=n;i++){
+        ans = max(ans,path(i));
+    }
+    cout<<ans;
+}
