@@ -48,3 +48,97 @@ Constraints:
 1 ≤ n ≤ 500
 
 */
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+
+bool visited[502][502];
+
+int find_out(vector<vector<int>>& grid, int m, int n, int x, int y, bool visited[][502]){
+    if(visited[x][y]){
+        return 0;
+    }
+    visited[x][y] = true;
+    if(grid[x][y]==2){
+        return 1;
+    }
+    if(grid[x][y]==0){
+        return 0;
+    }
+    int op1,op2,op3,op4;
+    op1 = op2 = op3 = op4 = 0;
+    if(x-1>=0){
+        op1 = find_out(grid,m,n,x-1,y,visited);
+    }
+    if(y-1>=0){
+        op2 = find_out(grid,m,n,x,y-1,visited);
+    }
+    if(x+1<n){
+        op3 = find_out(grid,m,n,x+1,y,visited);
+    }
+    if(y+1<m){
+        op4 = find_out(grid,m,n,x,y+1,visited);
+    }
+    return op1|op2|op3|op4;
+    
+}
+
+
+class Solution {
+public:
+    bool is_Possible(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        int x,y;
+        int set = 0;
+        for(int i = 0;i<m;i++){
+            if(set == 1){
+                break;
+            }
+            for(int j = 0;j<n;j++){
+                if(grid[i][j] == 1){
+                    x = i;
+                    y = j;
+                    set = 1;
+                    break;
+                }
+            }
+        }
+    
+        for(int i = 0;i<m;i++){
+            for(int j = 0;j<n;j++){
+                visited[i][j] = false;
+            }
+        }
+        int ans = find_out(grid,m,n,x,y,visited);
+        if(ans == 1){
+            return true;
+        }
+        return false;
+        
+    }
+};
+
+
+// { Driver Code Starts.
+int main(){
+	int tc;
+	cin >> tc;
+	while(tc--){
+		int n;
+		cin >> n;
+		vector<vector<int>>grid(n, vector<int>(n, -1));
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
+				cin >> grid[i][j];
+			}
+		}
+		Solution obj;
+		bool ans = obj.is_Possible(grid);
+		cout << ((ans) ? "1\n" : "0\n");
+	}
+	return 0;
+}  // } Driver Code Ends
