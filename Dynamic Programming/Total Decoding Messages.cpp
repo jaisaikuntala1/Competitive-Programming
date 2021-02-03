@@ -37,3 +37,67 @@ Constraints:
 1 <= |str| <= 104
 
 */
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+
+
+int find_ways(string str,int n,int dp[]){
+    
+     if(n==0||n==1){
+        return 1;
+    }
+   if(dp[n]!=-1){
+       return dp[n];
+   }
+    int count = 0;
+    if(str[n-1]>'0'){
+        count = (count + find_ways(str,n-1,dp))%1000000007;
+    }
+    if(str[n-2] == '1'||str[n-2]=='2' && str[n-1]<'7'){
+        count = (count + find_ways(str,n-2,dp))%1000000007;
+    }
+    return dp[n] = count;
+    
+}
+
+class Solution {
+	public:
+		int CountWays(string str){
+		    // Code here
+		    int found = str.find("00");
+           
+		    if(found>=0){
+		        return 0;
+		    }
+		    if(str[0]=='0'){
+		        return 0;
+		    }
+            int l = str.length();
+           int dp[l+1];
+           for(int i=0;i<=l;i++){
+               dp[i] = -1;
+           }
+
+		    return find_ways(str,l,dp);
+		}
+
+};
+
+// { Driver Code Starts.
+int main(){
+	int tc;
+	cin >> tc;
+	while(tc--){
+		string str;
+		cin >> str;
+		Solution obj;
+		int ans = obj.CountWays(str);
+		cout << ans << "\n";
+	}
+	return 0;
+}  // } Driver Code Ends
