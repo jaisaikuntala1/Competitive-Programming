@@ -204,3 +204,41 @@ Y
 .
 
 */
+
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+
+int max_score(int a[],int dp[][3002],int i,int j){
+    if(i>j){
+        return 0;
+    }
+    if(i==j){
+        return a[i];
+    }
+    if(dp[i][j]!=-1){
+        return dp[i][j];
+    }
+    int op1 = 0;
+    int op2 = 0;
+    op1 = a[i] + min(max_score(a,dp,i+2,j),max_score(a,dp,i+1,j-1));
+    op2 = a[j] + min(max_score(a,dp,i+1,j-1),max_score(a,dp,i,j-2));
+    return dp[i][j] = max(op1,op2);
+}
+
+int32_t main() {
+    int n;
+    cin>>n;
+    int a[n];
+    int total = 0;
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+        total += a[i];
+    }
+    int dp[3002][3002];
+    memset(dp,-1,sizeof dp);
+    int temp = max_score(a,dp,0,n-1);
+    cout<<2*temp-total;
+    
+}
+
