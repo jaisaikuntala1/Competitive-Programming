@@ -180,3 +180,36 @@ Items
 
 */
 
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+int32_t main() {
+    int n,W;
+    cin>>n>>W;
+    int wt[n];
+    int val[n];
+    for(int i=0;i<n;i++){
+        cin>>wt[i]>>val[i];
+    }
+    int dp[n+1][W+1];
+    memset(dp,0,sizeof dp);
+    for(int i=wt[0];i<=W;i++){
+        dp[1][i] = val[0];
+    }
+    for(int i=2;i<=n;i++){
+        for(int j=1;j<=W;j++){
+            dp[i][j] = dp[i-1][j];
+            if(j>=wt[i-1]){
+                dp[i][j] = max(dp[i][j],val[i-1]+dp[i-1][j-wt[i-1]]);
+            }
+        }
+    }
+    cout<<dp[n][W];
+
+    
+  
+ 
+  
+}
+
+
