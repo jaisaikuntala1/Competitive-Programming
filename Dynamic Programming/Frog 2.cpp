@@ -229,3 +229,48 @@ If we follow the path
 .
 
 */
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+#define mod 1000000007
+
+int min_cost(int h[],int n,int idx,int dp[],int k){
+    if(dp[idx]!=-1){
+        return dp[idx];
+    }
+    if(idx==n-1){
+        return 0;
+    }
+
+    if(idx>=n){
+        return INT_MAX;
+    }
+    int ans = INT_MAX;
+    for(int i=1;i<=k;i++){
+        if(idx+i<n){
+            ans = min(ans,abs(h[idx+i]-h[idx])+min_cost(h,n,idx+i,dp,k));
+        }
+        else{
+            break;
+        }
+    }
+     
+    
+    return dp[idx] = ans;
+    
+}
+
+int32_t main() {
+    int n,k;
+    cin>>n>>k;
+    int h[n];
+    for(int i=0;i<n;i++){
+        cin>>h[i];
+    }
+    int dp[n+1];
+    for(int i=0;i<=n;i++){
+        dp[i] = -1;
+    }
+    cout<<min_cost(h,n,0,dp,k);
+
+}
