@@ -152,3 +152,48 @@ Sample Output 4
 
 
 */
+
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+#define mod 1000000007
+vector<int> v[100002];
+int dp[100002][2];
+
+int num_ways(int parent,int color,int curr){
+    if(dp[curr][color]!=-1){return dp[curr][color];}
+    int ans = 0;
+    int w1 = 1;
+    for(auto x:v[curr]){
+        if(x!=parent){
+            w1 = (w1*num_ways(curr,0,x))%mod;
+        }
+    }
+    ans = (ans+w1)%mod;
+    int w2 = 0;
+    if(color==0){
+        w2 = 1;
+        for(auto x:v[curr]){
+            if(x!=parent){
+                w2 = (w2*num_ways(curr,1,x))%mod;
+            }
+        }
+    }
+    ans = (ans+w2)%mod;
+    return dp[curr][color] = ans;
+}
+int32_t main() {
+    int n;
+    cin>>n;
+    n--;
+    int a,b;
+    while(n--){
+        cin>>a>>b;
+        v[a].push_back(b);
+        v[b].push_back(a);
+
+    }
+    memset(dp,-1,sizeof dp);
+    cout<<num_ways(-1,0,1);
+    
+}
