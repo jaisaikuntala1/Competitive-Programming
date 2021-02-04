@@ -140,3 +140,42 @@ Copy
 Taro should do activities in the order C, A, B, A, C, B, A.
 
 */
+
+#include <bits/stdc++.h>
+using namespace std;
+int max_score(int n,int a[],int b[],int c[],int constraint,int idx,int dp[][4]){
+    if(idx==n){
+        return 0;
+    }
+    if(dp[idx][constraint]!=-1){
+        return dp[idx][constraint];
+    }
+   
+    int op1,op2,op3;
+    op1 = op2 = op3 = 0;
+    if(constraint!=1){
+        op1 = a[idx]+max_score(n,a,b,c,1,idx+1,dp);
+    }
+    if(constraint!=2){
+        op2 = b[idx]+max_score(n,a,b,c,2,idx+1,dp);
+    }
+    if(constraint!=3){
+        op3 = c[idx]+max_score(n,a,b,c,3,idx+1,dp);
+    }
+    return dp[idx][constraint] = max(op1,max(op2,op3));
+}
+int main() {
+    int n;
+    cin>>n;
+    int a[n];
+    int b[n];
+    int c[n];
+    for(int i=0;i<n;i++){
+        cin>>a[i]>>b[i]>>c[i];
+    }
+    int dp[n+1][4];
+    memset(dp,-1,sizeof dp);
+    
+    cout<<max_score(n,a,b,c,0,0,dp);
+}
+
