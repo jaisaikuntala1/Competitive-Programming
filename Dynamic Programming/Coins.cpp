@@ -311,3 +311,36 @@ Copy
 
 
 */
+
+
+#include <bits/stdc++.h>
+using namespace std;
+double dp[3001][3001];
+double prob(double pro[],int heads,int tails,int idx,int n){
+    if(idx==n){
+        if(heads>tails){
+            return 1;
+        }
+        return 0;
+    }
+    if(dp[idx][heads]>-0.5){
+        return dp[idx][heads];
+    }
+    
+    double ans = pro[idx]*prob(pro,heads+1,tails,idx+1,n);
+    ans = ans+(1-pro[idx])*prob(pro,heads,tails+1,idx+1,n);
+    return dp[idx][heads] = ans;
+
+}
+int main() {
+    int n;
+    cin>>n;
+    double pro[n];
+    for(int i=0;i<n;i++){
+        cin>>pro[i];
+    }
+    memset(dp,-1,sizeof dp);
+    cout<<fixed<<setprecision(10)<<prob(pro,0,0,0,n);
+
+}
+
