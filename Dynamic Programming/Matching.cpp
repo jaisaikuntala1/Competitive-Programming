@@ -283,3 +283,42 @@ Be sure to print the number modulo
 .
 
 */
+
+
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+#define mod 1000000007
+int compat[21][21];
+int dp[21][(1<<22)];
+int num_pairs(int compat[][21],int idx,int WomSub,int n){
+    if(idx==n){
+        if(WomSub==0){
+            return 1;
+        }
+        return 0;
+    }
+    if(dp[idx][WomSub]!=-1){
+        return dp[idx][WomSub];
+    }
+    int cnt = 0;
+    for(int i=0;i<n;i++){
+        if(compat[idx][i] && (WomSub&(1<<i))){
+            cnt = (cnt+num_pairs(compat,idx+1,(WomSub^(1<<i)),n))%mod;
+        }
+    }
+    return dp[idx][WomSub] = cnt;
+}
+
+int32_t main() {
+    int n;
+    cin>>n;
+    
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            cin>>compat[i][j];
+        }
+    }
+    memset(dp,-1,sizeof dp);
+    cout<<num_pairs(compat,0,(1<<n)-1,n);
+}
