@@ -49,3 +49,77 @@ Constraints:
 0 <= Ai <= 108
 
 */
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+ // } Driver Code Ends
+
+
+
+
+
+   
+
+// function to find the trapped water in between buildings
+// arr: input array
+// n: size of array
+int trappingWater(int arr[], int n){
+
+    // Your code here
+    int left[n];
+    int right[n];
+    left[0] = left[n-1] = right[0] = right[n-1] = 0;
+    int maxi = arr[0];
+    for(int i=1;i<n-1;i++){
+        left[i] = maxi;
+        maxi = max(maxi,arr[i]);
+    }
+    maxi = arr[n-1];
+    for(int i=n-2;i>0;i--){
+        right[i] = maxi;
+        maxi = max(maxi,arr[i]);
+    }
+    int ans = 0;
+    for(int i=1;i<n-1;i++){
+        int temp = min(left[i],right[i]);
+        if(arr[i]>=temp){
+            continue;
+        }
+        ans += abs(temp-arr[i]);
+    }
+    return ans;
+    
+}
+
+
+// { Driver Code Starts.
+
+int main(){
+    
+    int t;
+    //testcases
+    cin >> t;
+    
+    while(t--){
+        int n;
+        
+        //size of array
+        cin >> n;
+        
+        int a[n];
+        
+        //adding elements to the array
+        for(int i =0;i<n;i++){
+            cin >> a[i];            
+        }
+        
+        //calling trappingWater() function
+        cout << trappingWater(a, n) << endl;
+        
+    }
+    
+    return 0;
+}  // } Driver Code Ends
