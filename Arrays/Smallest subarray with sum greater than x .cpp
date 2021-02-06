@@ -37,3 +37,53 @@ Constraints:
 1 ≤ A[] ≤ 104
 
 */
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int sb(int arr[], int n, int x);
+
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,x;
+		cin>>n>>x;
+		int a[n];
+		for(int i=0;i<n;i++)
+		cin>>a[i];
+		
+		cout<<sb(a,n,x)<<endl;
+	}
+	return 0;
+}// } Driver Code Ends
+
+
+
+
+int sb(int arr[], int n, int x)
+{
+    // Your code goes here   
+    int i=0;
+    int mini = INT_MAX;
+    int csum[n];
+    csum[0] = arr[0];
+    for(int k=1;k<n;k++){
+        csum[k] = csum[k-1]+arr[k]; 
+    }
+    for(int j=0;j<n;j++){
+        if(csum[j]>x){
+            while(i<j && (csum[j]-csum[i])>x ){
+                i++;
+            }
+            mini = min(mini,j-i+1);
+        }
+    }
+    
+    return mini;
+    
+}
+
