@@ -40,3 +40,92 @@ As it is a function problem, hence a user should not read any input from stdin/c
 not to write the full code.
 
 */
+
+
+#include <bits/stdc++.h>
+using namespace std;
+#define MAX 1000
+
+int maxArea(int M[MAX][MAX], int n, int m);
+int main() {
+    int T;
+    cin >> T;
+
+    int M[MAX][MAX];
+
+    while (T--) {
+        int n, m;
+        cin >> n >> m;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                cin >> M[i][j];
+            }
+        }
+        cout << maxArea(M, n, m) << endl;
+    }
+}
+// } Driver Code Ends
+
+int getMaxArea(int arr[], int n){
+    
+    // Your code here
+    int ans = INT_MIN;
+    stack<pair<int,int>> st;
+    for(int i=0;i<n;i++){
+        if(st.empty()){
+            st.push({i,arr[i]});
+            continue;
+        }
+        else{
+            if(arr[i]>=st.top().second){
+                st.push({i,arr[i]});
+            }
+            else{
+                int idx;
+                while(!st.empty() && st.top().second>arr[i]){
+                    idx = st.top().first;
+                    ans = max(ans,(i-st.top().first)*st.top().second);
+                    st.pop();
+                }
+                st.push({idx,arr[i]});
+            }
+        }
+    }
+    if(!st.empty()){
+        while(!st.empty()){
+            ans = max(ans,(n-st.top().first)*st.top().second);
+            st.pop();
+        }
+    }
+    return ans;
+    
+    
+}
+/*You are required to complete this method*/
+int maxArea(int M[MAX][MAX], int n, int m) {
+    // Your code here
+    
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(i==0 || M[i][j]==0){
+                continue;
+            }
+            else{
+                M[i][j] = M[i-1][j]+1;
+            }
+            
+        }
+    }
+    int ans = INT_MIN;
+    for(int i=0;i<n;i++){
+        int temp[m];
+        for(int j=0;j<m;j++){
+            temp[j] = M[i][j];
+        }
+        ans = max(ans,getMaxArea(temp,m));
+    }
+    return ans;
+    
+    
+}
