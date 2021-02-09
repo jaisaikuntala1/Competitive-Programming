@@ -43,3 +43,118 @@ Constraints:
 1 ≤ n, m ≤ 500
 
 */
+
+#include<bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+
+
+
+
+
+class Solution {
+public:
+	vector<vector<int>>nearest(vector<vector<int>>grid){
+	    // Code here
+	    queue<pair<int,int>> q;
+	    int r = grid.size();
+	    int c = grid[0].size();
+	    
+	    bool visited[r][c];
+	    for(int i=0;i<r;i++){
+	        for(int j=0;j<c;j++){
+	            visited[i][j] = false;
+	        }
+	    }
+	    
+	    for(int i=0;i<r;i++){
+	        for(int j=0;j<c;j++){
+	            if(grid[i][j]==1){
+	                q.push({i,j});
+	                visited[i][j] = true;
+	            }
+	        }
+	    }
+	    vector<vector<int>> cost(r,vector<int> (c,INT_MAX));
+	    
+	    for(int i=0;i<r;i++){
+	        for(int j=0;j<c;j++){
+	            if(grid[i][j]==1){
+	                cost[i][j] = 0;
+	            }
+	        }
+	    }
+	    while(!q.empty()){
+	        pair<int,int> p = q.front();
+	        int i = p.first;
+	        int j = p.second;
+	        if(i-1>=0){
+	            if(grid[i-1][j]!=1){
+	                cost[i-1][j] = min(cost[i-1][j],1+cost[i][j]);
+	                if(!visited[i-1][j]){
+	                    q.push({i-1,j});
+	                    visited[i-1][j] = true;
+	                }
+	            }
+	            
+	        }
+	        if(i+1<r){
+	            if(grid[i+1][j]!=1){
+	                cost[i+1][j] = min(cost[i+1][j],1+cost[i][j]);
+	                if(!visited[i+1][j]){
+	                    q.push({i+1,j});
+	                    visited[i+1][j] = true;
+	                }
+	            }
+	        }
+	        if(j-1>=0){
+	            if(grid[i][j-1]!=1){
+	                cost[i][j-1] = min(cost[i][j-1],1+cost[i][j]);
+	                if(!visited[i][j-1]){
+	                    q.push({i,j-1});
+	                    visited[i][j-1] = true;
+	                }
+	            }
+	        }
+	        if(j+1<c){
+	            if(grid[i][j+1]!=1){
+	                cost[i][j+1] = min(cost[i][j+1],1+cost[i][j]);
+	                if(!visited[i][j+1]){
+	                    q.push({i,j+1});
+	                    visited[i][j+1] = true;
+	                }
+	            }
+	        }
+	        
+	      q.pop();  
+	    }
+	 return cost;   
+	}
+};
+
+
+// { Driver Code Starts.
+int main(){
+	int tc;
+	cin >> tc;
+	while(tc--){
+		int n, m;
+		cin >> n >> m;
+		vector<vector<int>>grid(n, vector<int>(m, -1));
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < m; j++){
+				cin >> grid[i][j];
+			}
+		}
+		Solution obj;
+		vector<vector<int>> ans = obj.nearest(grid);
+		for(auto i: ans){
+			for(auto j: i){
+				cout << j << " ";
+			}
+			cout << "\n";
+		}
+	}
+	return 0;
+}  // } Driver Code Ends
