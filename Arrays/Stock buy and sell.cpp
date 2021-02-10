@@ -42,3 +42,108 @@ Constraints:
 
 
 */
+
+
+//Initial template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+ // } Driver Code Ends
+
+
+//User function template for C++
+
+int buy(vector<int> A,int n,int start){
+    if(n==1){
+        return -1;
+    }
+    int i = start;
+    while(i<n-1 && A[i]>=A[i+1]){
+        i++;
+    }
+    if(i==n-1){
+        return -1;
+    }
+    return i;
+}
+
+int sell(vector<int> A,int n,int start){
+    if(start>n-1){
+        return -1;
+    }
+    int i = start;
+    while(i<n-1 && A[i]<=A[i+1]){
+        i++;
+    }
+    
+    return i;
+}
+
+class Solution{
+public:
+    vector<vector<int> > stockBuySell(vector<int> A, int n){
+        // code here
+       int i = buy(A,n,0);
+        if(i==-1){
+            vector<vector<int>> ans;
+            return ans;
+        }
+        int j = sell(A,n,i+1);
+        if(j==-1){
+            vector<vector<int>> ans2;
+            return ans2;
+        }
+        vector<int> buyy;
+        vector<int> selll;
+        while(i!=-1 && j!=-1){
+            buyy.push_back(i);
+           
+            selll.push_back(j);
+          
+            i = buy(A,n,j+1);
+            j = sell(A,n,i+1);
+            
+        }
+    
+        int l = min(buyy.size(),selll.size());
+        vector<vector<int>> ans(l,vector<int> (2,0));
+        for(int i=0;i<l;i++){
+            ans[i][0] = buyy[i];
+            ans[i][1] = selll[i];
+        }
+  
+        return ans;
+        
+        
+    }
+};
+
+// { Driver Code Starts.
+
+int main()
+{   
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        vector<int> A(n);
+        for (int i=0; i<n; ++i){
+            cin>>A[i];
+        }
+        Solution ob;
+        vector<vector<int> > ans = ob.stockBuySell(A, n);
+        if(ans.size()==0)
+            cout<<"No Profit";
+        else{
+            for (int i=0; i<ans.size(); ++i){
+                cout<<"("<<ans[i][0]<<" "<<ans[i][1]<<") ";
+            }
+        }cout<<endl;
+    }
+    return 0;
+}
+
+  // } Driver Code Ends
