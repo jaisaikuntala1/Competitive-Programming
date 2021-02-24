@@ -28,3 +28,44 @@ Sample Output
 84498
 
 */
+
+
+#include <bits/stdc++.h>
+using namespace std;
+#define mod 1000003
+#define int long long
+int dp[1000][1000][2];
+int cal(int n, int k,int val,int prev,int idx){
+    if(idx==n){
+        if(val==k){
+            return 1;
+        }
+        return 0;
+    }
+    if(dp[val][idx][prev] != -1){
+        return dp[val][idx][prev];
+    }
+
+    int ans = 0;
+    ans = cal(n,k,val,0,idx+1);
+    ans %= mod;
+    if(prev==1){
+        ans += cal(n,k,val+1,1,idx+1);
+        ans %= mod;
+    }
+    else{
+        ans += cal(n,k,val,1,idx+1);
+        ans %= mod;
+    }
+    return dp[val][idx][prev] = ans;
+}
+int32_t main() {
+    int t;
+    cin>>t;
+    while(t--){
+        int n,k;
+        cin>>n>>k;
+        memset(dp,-1,sizeof dp);
+        cout<<(cal(n,k,0,0,1)+cal(n,k,0,1,1))%mod<<endl;
+    }
+}
